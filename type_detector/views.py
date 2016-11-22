@@ -19,7 +19,7 @@ images_path = 'type_detector/libs'
 
 labels = [] # Initialising labels as an empty array.
 home_dir = os.getenv("HOME")
-caffe_root = os.path.join(home_dir, 'caffe')
+caffe_root = os.path.join(home_dir, 'Git/caffe')
 sys.path.insert(0, os.path.join(caffe_root, 'python'))
 model_def = os.path.join(caffe_root, 'models', 'bvlc_reference_caffenet','deploy.prototxt')
 model_weights = os.path.join(caffe_root, 'models','bvlc_reference_caffenet','bvlc_reference_caffenet.caffemodel')
@@ -60,8 +60,8 @@ def detect(request):
 	del vectors
 	KNN.setFilesList(img_files)
 
-	#my_image_url = "https://upload.wikimedia.org/wikipedia/commons/b/be/Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG"
-	my_image_url= "http://www.pyimagesearch.com/wp-content/uploads/2015/05/obama.jpg"
+	my_image_url = "https://upload.wikimedia.org/wikipedia/commons/b/be/Orang_Utan%2C_Semenggok_Forest_Reserve%2C_Sarawak%2C_Borneo%2C_Malaysia.JPG"
+	#my_image_url = "http://www.pyimagesearch.com/wp-content/uploads/2015/05/obama.jpg"
 	urllib.urlretrieve (my_image_url, "image.jpg")
 	image =  misc.imread('image.jpg')
 
@@ -79,7 +79,7 @@ def detect(request):
 	print "-------------------"
 	print "-------------------"
 
-	return HttpResponse(predict_imageNet('image.jpg'))
+	return render(request, 'type_detector/detect.html')
 
 def predict_imageNet(image_filename):
     image = caffe.io.load_image(image_filename)
